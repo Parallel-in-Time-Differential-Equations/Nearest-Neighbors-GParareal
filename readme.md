@@ -6,9 +6,11 @@ This repository is the official implementation of [Nearest Neighbors Gparareal: 
 <!-- ![Non-linear Hopf Bifurcation](img/nonaut_scal_speedup.png)![FHN PDE](img/fhn_pde_speedup_upd.png) -->
 
 <p align="center">
-  <img alt="Light" src="img/nonaut_scal_speedup.png" width="48%">
+ 
+  <img  src="img/nonaut_scal_speedup.png" width="48%" title="Non-linear Hopf Bifurcation system">
 &nbsp; &nbsp; 
-  <img alt="Dark" src="img/fhn_pde_speedup_upd.png" width="48%">
+  <img  src="img/fhn_pde_speedup_upd.png" width="48%" title="FitzHugh-Nagumo Equations (PDE)">
+  <p align="center"> Non-linear Hopf Bifurcation system (left) and FitzHugh-Nagumo Equations (right).</p>
 </p>
 
 
