@@ -1,6 +1,6 @@
 # Nearest Neighbors Gparareal Improving Scalability Of Gaussian Processes For Parallel In Time Solvers
 
-This repository is the official implementation of [Nearest Neighbors Gparareal Improving Scalability Of Gaussian Processes For Parallel In Time Solvers](). 
+This repository is the official implementation of [Nearest Neighbors Gparareal: Improving Scalability Of Gaussian Processes For Parallel In Time Solvers](). 
 
 >In this work we introduce Nearest Neighbors GParareal (NN-GParareal), a novel data-enriched parallel-in-time (PinT) integration algorithm. NN-GParareal builds upon GParareal, another PinT, by improving its scalability properties for higher-dimensional systems and increased processor count. This translates into sensibly faster parallel speed-up gains, comapred to both Parareal and GParareal, over a range of systems
 <!-- ![Non-linear Hopf Bifurcation](img/nonaut_scal_speedup.png)![FHN PDE](img/fhn_pde_speedup_upd.png) -->
