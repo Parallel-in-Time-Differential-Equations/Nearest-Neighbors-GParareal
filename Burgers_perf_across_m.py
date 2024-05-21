@@ -136,11 +136,11 @@ if False:
 #%%% Analysis - Updated 
 
 def get_bin_lab(bins, gp):
-    out = [r'$K_{GPara} < K_{NN\text{--}GPara}'+fr' < {bins[0]}$']
+    out = [r'$K_{GPara} < K_{nnGPara}'+fr' < {bins[0]}$']
     for i in range(1, len(bins)):
         # out.append(rf'${bins[i-1]} \leq' + ' K_{NN} ' + rf'< {bins[i]}$')
-        out.append(r'$K_{NN\text{--}GPara} '+rf'={bins[i-1]}$' )
-    out.append(r'$K_{NN\text{--}GPara}' + rf' \geq {bins[-1]}$')
+        out.append(r'$K_{nnGPara} '+rf'={bins[i-1]}$' )
+    out.append(r'$K_{nnGPara}' + rf' \geq {bins[-1]}$')
     return out
         
 def build_bins(df, bins, bins_lab):
@@ -158,10 +158,10 @@ def build_bins(df, bins, bins_lab):
     return out_df.set_index('nn')
 
 def get_bin_lab_speed(bins, gp):
-    out = [r'$S_{GPara} < S_{NN\text{--}GPara}'+rf' < {bins[0]}$']
+    out = [r'$S_{GPara} < S_{nnGPara}'+rf' < {bins[0]}$']
     for i in range(1, len(bins)):
-        out.append(rf'${bins[i-1]} \leq '+r'S_{NN\text{--}GPara}'+rf' < {bins[i]}$')
-    out.append(r'$S_{NN\text{--}GPara}' +rf' \geq {bins[-1]} $' )
+        out.append(rf'${bins[i-1]} \leq '+r'S_{nnGPara}'+rf' < {bins[i]}$')
+    out.append(r'$S_{nnGPara}' +rf' \geq {bins[-1]} $' )
     return out
         
 def build_bins_speed(df, bins, bins_lab):
@@ -195,10 +195,11 @@ def do(T, bins_k, bins_speed, kgp, speed_gp):
     df = pd.DataFrame.from_records(res)
     df.columns = ['N','nn','seed','knn','t','Ft','mdl_t']
     
+    T_str = str(T).replace('.','_')
     # Iter to conv
     for idx, gr in df.groupby(['N']):
         N = idx[0]
-        fig, ax = plt.subplots(figsize=(6,6))
+        fig, ax = plt.subplots(figsize=(3.5,3.5))
         out = gr.groupby(['nn', 'knn']).agg(count=('N','count')).reset_index(level=1)
         out.pivot_table(values='count', index=out.index, columns='knn', fill_value=0).plot.bar(stacked=True)
         bins = bins_k
@@ -214,7 +215,7 @@ def do(T, bins_k, bins_speed, kgp, speed_gp):
         ax.set_xlabel('m')
         ax.set_ylabel('Proportion')
         ax.set_title(f'$t_N={T}$')
-        store_fig(fig, f'Burges_perf_across_m_{T}_K_updated')
+        store_fig(fig, f'Burges_perf_across_m_{T_str}_K_updated')
         
         
         # Expected Speedup
@@ -243,7 +244,7 @@ def do(T, bins_k, bins_speed, kgp, speed_gp):
         # Iter to conv
         for idx, gr in df.groupby(['N']):
             N = idx[0]
-            fig, ax = plt.subplots(figsize=(6,6))
+            fig, ax = plt.subplots(figsize=(3.5,3.5))
             gr['speedup'] = exp_serial_c/(F_per_k*gr['knn'] + gr['mdl_t'])
             out = gr.groupby(['nn', 'knn']).agg(count=('N','count')).reset_index(level=1)
             print(gr.speedup.quantile([0.1, 0.25, 0.5, 0.75, 0.9]))
@@ -264,7 +265,7 @@ def do(T, bins_k, bins_speed, kgp, speed_gp):
             ax.set_xlabel('m')
             ax.set_ylabel('Proportion')
             ax.set_title(f'$t_N={T}$')
-            store_fig(fig, f'Burges_perf_across_m_{T}_speedup_updated')
+            store_fig(fig, f'Burges_perf_across_m_{T_str}_speedup_updated')
 
 
 do(5, [8,9,10, 11], [11,12,13,14], 6, 7.94)

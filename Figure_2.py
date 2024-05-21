@@ -506,6 +506,17 @@ err_gp = res_gp['err_store_mdls']
 err = err_nn
 fig, axs = plt.subplots(1,3, figsize=(10,2))
 
+def tr(lbl):
+    if lbl == '1-NN':
+        return '1-nn'
+    elif lbl == '2-NN':
+        return '2-nn'
+    elif lbl == '3-NN':
+        return '3-nn'
+    elif lbl == '4-NN':
+        return '4-nn'
+    else:
+        raise Exception(3)
 for i, k in enumerate(range(4, 7)):
 
     x_plt = (np.arange(a:=len(err['para'][k])))+(N-a)
@@ -517,7 +528,7 @@ for i, k in enumerate(range(4, 7)):
         if j == 0:
             ax.plot(x_plt, err[mdl][k], ls=(0,(5,10)), label='Para', c='black')
         else:
-            ax.plot(x_plt, err[mdl][k], label=mdl, alpha=0.5, c=c[j-1])
+            ax.plot(x_plt, err[mdl][k], label=tr(mdl), alpha=0.5, c=c[j-1])
     ax.axhline(-6,ls='dashed', lw=1, color='gray')
     ax.axhline(-8,ls='dashed', lw=1, color='black')
     ax.axhline(-10,ls='dashed', lw=1, color='gray')
@@ -531,9 +542,9 @@ store_fig(fig, 'rossler_pred_err_para')
 #%
 err = err_gp.copy()
 err['GPara'] = err.pop('para')
-err['NN-GPara (10)'] = err.pop('NNGP10')
-err['NN-GPara (25)'] = err.pop('NNGP25')
-err['NN-GPara (40)'] = err.pop('NNGP40')
+err['nnGPara (10)'] = err.pop('NNGP10')
+err['nnGPara (25)'] = err.pop('NNGP25')
+err['nnGPara (40)'] = err.pop('NNGP40')
 # fig, axs = plt.subplots(1,3, figsize=(10,2))
 fig, axs = plt.subplot_mosaic('1112223334', figsize=(12,2), constrained_layout=True)
 
@@ -545,7 +556,7 @@ for i, k in enumerate(range(4, 7)):
     # for mdl in ['GPara','1-NN', '2-NN', '3-NN', '4-NN', '5-NN', '10-NN', '15-NN', '30-NN'][:10]: #err:
     #     ax.plot(err[mdl][k], label=mdl)
     c = ['gray', 'green', 'red']
-    for j, mdl in enumerate(['GPara', 'NN-GPara (10)', 'NN-GPara (25)', 'NN-GPara (40)']):
+    for j, mdl in enumerate(['GPara', 'nnGPara (10)', 'nnGPara (25)', 'nnGPara (40)']):
         if j == 0:
             ax.plot(x_plt, err[mdl][k], ls=(0,(5,10)), label='GPara', c='black')
         else:
@@ -576,7 +587,7 @@ for i, k in enumerate(range(4, 7)):
         if j == 0:
             ax.plot(x_plt, err[mdl][k], ls=(0,(5,10)), label='Para', c='black')
         else:
-            ax.plot(x_plt, err[mdl][k], label=mdl, alpha=0.5, c=c[j-1])
+            ax.plot(x_plt, err[mdl][k], label=tr(mdl), alpha=0.5, c=c[j-1])
     ax.axhline(-6,ls='dashed', lw=1, color='gray')
     ax.axhline(-8,ls='dashed', lw=1, color='black')
     ax.axhline(-10,ls='dashed', lw=1, color='gray')
@@ -589,9 +600,9 @@ axs['4'].axis("off")
 
 err = err_gp.copy()
 err['GPara'] = err.pop('para')
-err['NN-GPara (10)'] = err.pop('NNGP10')
-err['NN-GPara (25)'] = err.pop('NNGP25')
-err['NN-GPara (40)'] = err.pop('NNGP40')
+err['nnGPara (10)'] = err.pop('NNGP10')
+err['nnGPara (25)'] = err.pop('NNGP25')
+err['nnGPara (40)'] = err.pop('NNGP40')
 # fig, axs = plt.subplots(1,3, figsize=(10,2))
 # fig, axs = plt.subplot_mosaic('1112223334', figsize=(12,2), constrained_layout=True)
 # axs = axss[1,:]
@@ -603,7 +614,7 @@ for i, k in enumerate(range(4, 7)):
     # for mdl in ['GPara','1-NN', '2-NN', '3-NN', '4-NN', '5-NN', '10-NN', '15-NN', '30-NN'][:10]: #err:
     #     ax.plot(err[mdl][k], label=mdl)
     c = ['gray', 'green', 'red']
-    for j, mdl in enumerate(['GPara', 'NN-GPara (10)', 'NN-GPara (25)', 'NN-GPara (40)']):
+    for j, mdl in enumerate(['GPara', 'nnGPara (10)', 'nnGPara (25)', 'nnGPara (40)']):
         if j == 0:
             ax.plot(x_plt, err[mdl][k], ls=(0,(5,10)), label='GPara', c='black')
         else:

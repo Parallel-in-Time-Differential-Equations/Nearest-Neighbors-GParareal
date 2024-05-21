@@ -823,15 +823,17 @@ class Parareal():
         
         plot_data = {key : self._build_plot_data(**runs[key]) for key in runs}
          
+        cols = ['gray','green','blue','red', 'm', 'y', 'k']
+
         fig1, ax = plt.subplots(u0.shape[0],1)
         x_plot = np.linspace(tspan[0], tspan[-1], num=Nf+1)
         for i in range(u0.shape[0]):
-            for mdl_name in plot_data:
+            for _idx, mdl_name in enumerate(plot_data):
                 y_plot = np.log10(np.abs(fine - plot_data[mdl_name]['u_cont']))
-                ax[i].plot(x_plot, y_plot[:,i], linewidth=0.5, label=mdl_name)
+                ax[i].plot(x_plot, y_plot[:,i], linewidth=0.5, label=mdl_name, color=cols[_idx])
             ax[i].set_ylabel(f'$u_{{{i+1}}}$ log error')
             ax[i].axhline(np.log10(epsilon), linestyle='dashed', color='gray', linewidth=1, label='Tolerance')
-        ax[i].legend()
+        # ax[i].legend()
         ax[i].set_xlabel('$t$')
         if add_name:
             fig1.suptitle(f'{cstm_title} - {add_title}Algorithm error wrt fine solver')
@@ -840,7 +842,7 @@ class Parareal():
         fig1.tight_layout()
         
        
-        cols = ['b', 'g', 'r', 'c', 'm', 'y', 'k']
+        
         styles = ['solid', 'dotted', 'dashed', 'dashdot']
         fig2, ax = plt.subplots()
         cycl = cycler(linestyle=styles, lw=[0.5, 1, 1, 1]) * cycler('color', cols)

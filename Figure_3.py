@@ -196,7 +196,7 @@ for i,mdl in enumerate(['fhn_n', 'rossler_long_n', 'non_aut32_n', 'brus_2d_n', '
     ax.set_title(titles[i])
     ax.set_ylabel('')
     
-fig.supxlabel(r'$K_{NN\text{--}GPara}$', fontsize=15)
+fig.supxlabel(r'$K_{\rm nnGPara}$', fontsize=15)
 fig.supylabel('Density', fontsize=15)
 # axs[0].set_ylabel('Density')
 fig.tight_layout()

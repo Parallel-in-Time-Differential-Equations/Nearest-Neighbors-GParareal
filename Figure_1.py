@@ -1076,10 +1076,13 @@ def do_one_plot(data, until_i, c, ax, k, no_points=False, col=None):
 def get_colors(t, fine):
     if fine:
         cols = matplotlib.cm.get_cmap('Blues')
+        cols = ['blue' for i in range(t.shape[0]-1)]
     else:
         cols = matplotlib.cm.get_cmap('Reds')
-    c = cols(np.linspace(0.3, 0.99, t.shape[0]-1))
-    return c
+        cols = ['red' for i in range(t.shape[0]-1)]
+    # c = cols(np.linspace(0.3, 0.99, t.shape[0]-1))
+    return cols
+    # return c
 
 def plot_evolution(init_cond, solver, t, ax, k, fine=False):
     container = []

@@ -282,24 +282,26 @@ for idx, (lev, gr) in enumerate(df.groupby('N')):
     ax.plot(gr['k'], gr['t'], color='mediumblue')
     N = gr["N"].iloc[0]
     if N in [32, 64]:
-        ax.set_title(f'N: {N}, Tot tain time: {gr["t"].sum():.0f}s')
-        ax.set_ylabel('Train time for iter $k$ (sec)', color='mediumblue', fontsize=11)
+        ax.set_title(f'N: {N}, Tot tain time: {gr["t"].sum():.0f}s', fontsize=18, y=1.08)
+        ax.set_ylabel(r'$T_{\rm train}$ per iter (sec)', color='mediumblue', fontsize=16)
     elif N in [128]:
-        ax.set_title(f'N: {N}, Tot tain time: {gr["t"].sum():.0f}m')
-        ax.set_ylabel('Train time for iter $k$ (min)', color='mediumblue', fontsize=11)
+        ax.set_title(f'N: {N}, Tot tain time: {gr["t"].sum():.0f}m', fontsize=18, y=1.08)
+        ax.set_ylabel(r'$T_{\rm train}$ per iter (min)', color='mediumblue', fontsize=16)
     else:
-        ax.set_title(f'N: {N}, Tot tain time: {gr["t"].sum():.0f}h')
-        ax.set_ylabel('Train time for iter $k$ (h)', color='mediumblue', fontsize=11)
-    ax.set_xlabel('k')
+        ax.set_title(f'N: {N}, Tot tain time: {gr["t"].sum():.0f}h', fontsize=18, y=1.08)
+        ax.set_ylabel(r'$T_{\rm train}$ per iter (h)', color='mediumblue', fontsize=16)
+    ax.set_xlabel('k', fontsize=15)
     ax1 = ax.twinx()
     
     ax1.set_ylim((0,100))
     ax1.plot(gr['k'], gr['conv']/gr["N"].iloc[0]*100, color='red')
     ax.tick_params(colors='mediumblue', axis='y')
-    ax1.tick_params(colors='red', axis='y')
-# fig.suptitle('GParareal')
-ax1.set_ylabel('Converged intervals (%)', color='red', fontsize=11)
+    ax.tick_params(axis='both', labelsize=15)
+    ax1.tick_params(colors='red', axis='y', labelsize=15)
+# fig.suptitle('NN-GParareal')
+ax1.set_ylabel('Conv intervals (%)', color='red', fontsize=16)
 fig.tight_layout()
+
 
 store_fig(fig, 'tom_lab_scal_gp_int_runtime_upd')
 
@@ -357,30 +359,30 @@ df.columns = col
 
 # store_fig(fig, 'tom_lab_scal_nngp_int_runtime')
 
-
 fig, axs = plt.subplot_mosaic('001122;.3344.', figsize=(10,6))
 for idx, (lev, gr) in enumerate(df.groupby('N')):
     ax = axs[str(idx)]
     ax.plot(gr['k'], gr['t'], color='mediumblue')
     N = gr["N"].iloc[0]
     if N in [32, 64, 128]:
-        ax.set_title(f'N: {N}, Tot train time: {gr["t"].sum():.0f}s')
-        ax.set_ylabel('Train time for iter $k$  (sec)', color='mediumblue', fontsize=11)
+        ax.set_title(f'N: {N}, Tot tain time: {gr["t"].sum():.0f}s', fontsize=18, y=1.08)
+        ax.set_ylabel(r'$T_{\rm train}$ per iter (sec)', color='mediumblue', fontsize=16)
     elif N in [256, 512]:
-        ax.set_title(f'N: {N}, Tot train time: {gr["t"].sum()/60:.0f}m')
-        ax.set_ylabel('Train time for iter $k$  (sec)', color='mediumblue', fontsize=11)
+        ax.set_title(f'N: {N}, Tot tain time: {gr["t"].sum()/60:.0f}m', fontsize=18, y=1.08)
+        ax.set_ylabel(r'$T_{\rm train}$ per iter (sec)', color='mediumblue', fontsize=16)
     else:
-        ax.set_title(f'N: {N}, Tot train time: {gr["t"].sum():.0f}h')
-        ax.set_ylabel('Train time for iter $k$  (h)', color='mediumblue', fontsize=11)
-    ax.set_xlabel('k')
+        ax.set_title(f'N: {N}, Tot tain time: {gr["t"].sum():.0f}h', fontsize=18, y=1.08)
+        ax.set_ylabel(r'$T_{\rm train}$ per iter (h)', color='mediumblue', fontsize=16)
+    ax.set_xlabel('k', fontsize=15)
     ax1 = ax.twinx()
     
     ax1.set_ylim((0,100))
     ax1.plot(gr['k'], gr['conv']/gr["N"].iloc[0]*100, color='red')
     ax.tick_params(colors='mediumblue', axis='y')
-    ax1.tick_params(colors='red', axis='y')
+    ax.tick_params(axis='both', labelsize=15)
+    ax1.tick_params(colors='red', axis='y', labelsize=15)
 # fig.suptitle('NN-GParareal')
-ax1.set_ylabel('Converged intervals (%)', color='tab:red', fontsize=11)
+ax1.set_ylabel('Conv intervals (%)', color='red', fontsize=16)
 fig.tight_layout()
 
 store_fig(fig, 'tom_lab_scal_nngp_int_runtime_upd')

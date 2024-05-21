@@ -188,14 +188,25 @@ def tool_append(d, k, val):
     l.append(val)
     d[k] = l
     
+# def tr_key(key):
+#     mdl, typ = key.split('_')
+#     mdl_d = {'gp':'GParareal','para':'Parareal','nngp':'nnGParareal'}
+#     typ_d = {'exp':r'theoretical $S_{\rm alg}$', 'act':r'empirical $S_{\rm emp}$','exprough':'Theoretical approx', 'ub': 'maximum'}
+#     appdx = {'gp':r'$S_{\rm GPara}^* = K_{\rm GPara}/N$', 'para':'', 'nngp':r'$S_{\rm nnGPara}^* = K_{{\rm nnGPara}}/N$'}
+#     if typ == 'ub':
+#         return f'{mdl_d[mdl]} {typ_d[typ]} {appdx[mdl]}'
+#     return f'{mdl_d[mdl]} {typ_d[typ]}'
+
 def tr_key(key):
     mdl, typ = key.split('_')
-    mdl_d = {'gp':'GPara','para':'Para','nngp':'NN-GPara'}
-    typ_d = {'exp':'Theoretical', 'act':'Actual','exprough':'Theoretical approx', 'ub': 'Upper bound'}
-    appdx = {'gp':'$K_{GPara}/N$', 'para':'', 'nngp':'$K_{NN}/N$'}
+    mdl_d = {'gp':'GPara','para':'Para','nngp':'nnGPara'}
+    typ_d = {'exp':r'$S_{\rm ', 'act':r'$\hat S_{\rm ','exprough':'Theoretical approx', 'ub': r'$S_{\rm '}
+    appdx = {'gp':r'}^* = K_{\rm GPara}/N$', 'para':'', 'nngp':r'}^* = K_{{\rm nnGPara}}/N$'}
     if typ == 'ub':
-        return f'{mdl_d[mdl]} {typ_d[typ]} {appdx[mdl]}'
-    return f'{mdl_d[mdl]} {typ_d[typ]}'
+        return f'{typ_d[typ]}{mdl_d[mdl]}{appdx[mdl]}'
+    elif typ == 'act':
+        return f'{typ_d[typ]}{mdl_d[mdl]}'+r'}$ Empirical'
+    return f'{typ_d[typ]}{mdl_d[mdl]}'+r'}$'
     
 n_restarts = 1
 n_cores_d = {32:47, 64:47*2, 128:47*3, 256:47*6, 512:47*11}
@@ -252,7 +263,6 @@ ax.legend(prop={'size':7.8})
 ax.set_xlabel('Cores')
 ax.set_ylabel('Speed-up')
 fig.tight_layout()
-
 store_fig(fig, 'nonaut_scal_speedup_no_nngp')
 
 
@@ -261,6 +271,30 @@ cores  = [n_cores_d[N] for N in Ns]
 ls = {'exp':'dashed', 'act':'solid','exprough':'dotted', 'ub':(0,(1,10))}    
 c = {'gp':'red','para':'gray','nngp':'blue'}    
 fig, ax = plt.subplots()
+for key, val in store.items():
+    if 'nngp' in key:
+        continue
+    if 'exp' in key:
+        continue
+    mdl, typ = key.split('_')
+    x = np.array(cores)
+    y = np.array(val)
+    mask = np.arange(y.shape[0])
+    ax.plot(x[mask], y, label=tr_key(key), linestyle=ls[typ], c=c[mdl], lw=1)
+    ax.set_xticks(x)
+ax.plot(x, np.array([1]*5), ls='dashed', c='black', lw=1, label='Fine solver')
+ax.legend(prop={'size':7.8})
+ax.set_xlabel('Cores')
+ax.set_ylabel('Speed-up')
+fig.tight_layout()
+store_fig(fig, 'nonaut_scal_speedup_no_nngp_v2')
+
+
+
+cores  = [n_cores_d[N] for N in Ns]    
+ls = {'exp':'dashed', 'act':'solid','exprough':'dotted', 'ub':(0,(1,10))}    
+c = {'gp':'red','para':'gray','nngp':'blue'}    
+fig, ax = plt.subplots(figsize=(7,3))
 for key, val in store.items():
     mdl, typ = key.split('_')
     x = np.array(cores)
@@ -271,10 +305,11 @@ for key, val in store.items():
         store_ = y[3]
     if key == 'nngp_act':
         y[3] = 15.70
-    ax.plot(x[mask], y, label=tr_key(key), linestyle=ls[typ], c=c[mdl], lw=1)
+    ax.plot(x[mask], y, label=tr_key(key), linestyle=ls[typ], c=c[mdl])
     ax.set_xticks(x)
 ax.plot(x, np.array([1]*5), ls='dashed', c='black', lw=1, label='Fine solver')
-ax.legend(prop={'size':7.8})
+# ax.legend(prop={'size':7.8})
+ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left')
 ax.set_xlabel('Cores')
 ax.set_ylabel('Speed-up')
 fig.tight_layout()
@@ -306,3 +341,33 @@ ax.set_ylabel('Speed-up')
 fig.tight_layout()
 
 store_fig(fig, 'nonaut_scal_speedup_simpl')
+
+
+
+
+cores  = [n_cores_d[N] for N in Ns]    
+ls = {'exp':'dashed', 'act':'solid','exprough':'dotted', 'ub':(0,(1,10))}    
+c = {'gp':'red','para':'gray','nngp':'blue'}    
+fig, ax = plt.subplots()
+for key, val in store.items():
+    mdl, typ = key.split('_')
+    x = np.array(cores)
+    y = np.array(val)
+    mask = np.arange(y.shape[0])
+    if key == 'nngp_exprough':
+        continue
+    if 'exp' in key:
+        continue
+    if key == 'nngp_exp':
+        store_ = y[3]
+    if key == 'nngp_act':
+        y[3] = 15.70
+    ax.plot(x[mask], y, label=tr_key(key), linestyle=ls[typ], c=c[mdl], lw=1)
+    ax.set_xticks(x)
+ax.plot(x, np.array([1]*5), ls='dashed', c='black', lw=1, label='Fine solver')
+ax.legend(prop={'size':7.8})
+ax.set_xlabel('Cores')
+ax.set_ylabel('Speed-up')
+fig.tight_layout()
+
+store_fig(fig, 'nonaut_scal_speedup_simpl_v2')

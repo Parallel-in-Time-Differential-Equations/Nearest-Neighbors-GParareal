@@ -57,7 +57,7 @@ for i in range(data_x.shape[0]):
     art2 = ax.scatter(*data_x[i,:,:-1], c='gray', s=3)
 ax.set_xlabel('x coordinate')
 ax.set_ylabel('y coordinate')
-ax.legend([art2, art1], ['$U \in D_6$', '$U_{30}^{6}$'], fontsize=14)
+ax.legend([art2, art1], [r'$U \in \mathcal{U}_6$', '$U_{30}^{6}$'], fontsize=14)
     
 ax=axs[1]
 
@@ -121,7 +121,7 @@ for i in range(data_x.shape[0]):
     art2 = ax.scatter(*data_x[i,:,:-1], c='gray', s=3)
 ax.set_xlabel('x coordinate')
 ax.set_ylabel('y coordinate')
-ax.legend([art2, art1], ['$U \in D_6$', '$U_{30}^{6}$'], fontsize=14)
+ax.legend([art2, art1], [r'$U \in \mathcal{U}_6$', '$U_{30}^{6}$'], fontsize=14)
 store_fig(fig, 'brus_dataset_vis_para_data_only')
 
 fig, ax = plt.subplots()
