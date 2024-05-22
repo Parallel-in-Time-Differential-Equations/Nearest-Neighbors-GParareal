@@ -2,17 +2,17 @@
 
 This repository is the official implementation of [Nearest Neighbors GParareal: Improving Scalability Of Gaussian Processes For Parallel In Time Solvers](https://arxiv.org/abs/2405.12182). Authors: Guglielmo Gattiglio, Lyudmila Grigoryeva, and Massimiliano Tamborrino. 
 
->In this work we introduce nearest neighbors (nn) GParareal (nnGParareal), a novel data-enriched parallel-in-time (PinT) integration algorithm. nnGParareal builds upon GParareal, another PinT, by improving its scalability properties for higher-dimensional systems and increased processor count. This translates into sensibly faster parallel speed-up gains, comapred to both Parareal and GParareal, over a range of systems
+>In this work we introduce nearest neighbors (nn) GParareal (nnGParareal), a novel data-enriched parallel-in-time (PinT) integration algorithm. nnGParareal builds upon GParareal, another PinT, by improving its scalability properties for higher-dimensional systems and increased processor count. This translates into sensibly faster parallel speed-up gains, compared to both Parareal and GParareal, over a range of systems
 <!-- ![Non-linear Hopf Bifurcation](img/nonaut_scal_speedup.png)![FHN PDE](img/fhn_pde_speedup_upd.png) -->
 
-<p align="center">
  
   <img  src="img/nonaut_scal_speedup.png" width="48%" title="Non-linear Hopf Bifurcation system">
 &nbsp; &nbsp; 
   <img  src="img/fhn_pde_speedup_upd.png" width="48%" title="FitzHugh-Nagumo Equations (PDE)">
-  <p align="center"> Speed-up analysis of Non-linear Hopf Bifurcation system (left) and FitzHugh-Nagumo Equations (right).</p>
-</p>
+  <!-- <p align="center"> Speed-up analysis of Non-linear Hopf Bifurcation system (left) and FitzHugh-Nagumo Equations (right). $a+ \hat{b}$</p>
+</p> -->
 
+Speed-up analysis of Non-linear Hopf Bifurcation system (left) and FitzHugh-Nagumo Equations (right). Legend: upper bound $S_{\rm alg}^*$ (dotted lines), theoretical $S_{\rm alg}$ (dashed lines) and empirical $\hat S_{\rm alg}$ (solid lines) speed-up values for alg = Para, GPara and nnGPara, standing for Parareal, GParareal, and nnGParareal, respectively.
 
 
 ## Requirements
