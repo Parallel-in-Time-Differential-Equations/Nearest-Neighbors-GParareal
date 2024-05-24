@@ -48,6 +48,9 @@ The code and outputs to fully replicate the tables and figures in the paper are 
 Other files:
 - `preprocessing.py`: some simulation outputs have been processed to make them lighter, by removing unnecessary information.
 
+
+## How To Use
+
 To replicate a specific analysis, say `Figure_3.py`, run the following commands on a Linux shell. A similar strategy can be followed for Windows, but the commands need to be changed. Alternatively, install Windows Subsystem for Linux.
 ```bash
 wget https://github.com/Parallel-in-Time-Differential-Equations/Nearest-Neighbors-GParareal/archive/refs/heads/main.zip
