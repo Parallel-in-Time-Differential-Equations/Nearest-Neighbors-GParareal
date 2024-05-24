@@ -22,6 +22,18 @@ The code was run using python 3.10. To install requirements:
 ```setup
 pip install -r requirements.txt
 ```
+Note: on some machines, `mpi4py` may fail to install. This is not necessary to reproduce the results when using the outputs provided. However, the reader interested in reproducing everything from scratch, including simulation outputs, will require MPI for parallelization and, ideally, at least 512 compute cores. WARNING: reproducing all the simulations from scratch will take several days.
+
+For this reason, `mpi4py==3.1.5` has been commented in `requirements.txt` and _will not_ be installed by default.
+
+Make sure you also have installed Python _pip_ and _venv_. If not, you can use (some of) the commands below
+```
+sudo apt install python3-pip
+pip install virtualenv 
+
+apt install python3.10-venv
+```
+
 
 
 ## Results
@@ -36,7 +48,17 @@ The code and outputs to fully replicate the tables and figures in the paper are 
 Other files:
 - `preprocessing.py`: some simulation outputs have been processed to make them lighter, by removing unnecessary information.
 
-
+To replicate a specific analysis, say `Figure_3.py`, run the following commands on a Linux shell. A similar strategy can be followed for Windows, but the commands need to be changed. Alternatively, install Windows Subsystem for Linux.
+```bash
+wget https://github.com/Parallel-in-Time-Differential-Equations/Nearest-Neighbors-GParareal/archive/refs/heads/main.zip
+tar -xzf main.tar.gz
+cd Nearest-Neighbors-GParareal-main/
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+python3 Figure_3.py
+```
+Some users may need to replace the last line with `python Figure_3.py`, based on their platform. Figure_3's code does not produce any textual output, but you can find Figure 3 in `img/nngp_m_distr_oneline.pdf`.
 
 ## Acknowledgments
 

@@ -20,5 +20,5 @@ fonttools==4.47.2
 kiwisolver==1.4.5
 contourpy==1.2.0
 python-dateutil==2.8.2
-pandas-2.2.2
-mpi4py==3.1.5
+pandas==2.2.0
+#mpi4py==3.1.5
