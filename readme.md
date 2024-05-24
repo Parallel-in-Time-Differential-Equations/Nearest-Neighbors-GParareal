@@ -12,7 +12,7 @@ This repository is the official implementation of [Nearest Neighbors GParareal: 
   <!-- <p align="center"> Speed-up analysis of Non-linear Hopf Bifurcation system (left) and FitzHugh-Nagumo Equations (right). $a+ \hat{b}$</p> -->
 </p>
 
-Speed-up analysis of Non-linear Hopf Bifurcation system (left) and FitzHugh-Nagumo Equations (right). Legend: upper bound $S_{\rm alg}^*$ (dotted lines), theoretical $S_{\rm alg}$ (dashed lines) and empirical $\hat S_{\rm alg}$ (solid lines) speed-up values for alg = Para, GPara and nnGPara, standing for Parareal, GParareal, and nnGParareal, respectively.
+Speed-up analysis of Non-linear Hopf Bifurcation system (left) and FitzHugh-Nagumo Equations (right). Legend: upper bound $S_{\rm alg}^*$, theoretical $S_{\rm alg}$ and empirical $\hat S_{\rm alg}$ speed-up values for alg = Para, GPara and nnGPara, standing for Parareal, GParareal, and nnGParareal, respectively.
 
 
 ## Requirements
